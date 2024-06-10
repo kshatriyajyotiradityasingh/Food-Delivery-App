@@ -1,0 +1,34 @@
+{
+  "name": "react-app",
+  "version": "1.0.0",
+  "description": "this is a food react app",
+  
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kshatriyajyotiradityasingh/React-Practice.git"
+  },
+  "author": "Kshatriya Jyotiraditya Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kshatriyajyotiradityasingh/React-Practice/issues"
+  },
+  "homepage": "https://github.com/kshatriyajyotiradityasingh/React-Practice#readme",
+  "dependencies": {
+    "parcel": "^2.12.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+  ,
+  "browerslist" :[
+    "last 2 version"
+  ]
+  
+}
