@@ -2,12 +2,19 @@
   display: flex;
   flex-wrap: wrap;
 }
+.filter{
+  margin: 5px;
+}
+
+
 .header{
   display: flex;
   justify-content: space-between;
   border: solid 1px  #aaa6a6;
   box-shadow: 10px;
 }
+
+
 
 .logo{
   width: 180px;
@@ -47,6 +54,19 @@
   border-radius:3px ;
   border: solid 1px #aaa6a6;
 }
+.shimmer-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.shimmer-card{
+    padding: 5px;
+    width: 270px;
+    height: 400px;
+    margin: 5px;
+    border-radius: 3px;
+    background-color: #d8d4d4;
+    border: solid 1px #aaa6a6;
+}
 .res-des{
   display: flex;
   flex-direction: column;
@@ -55,6 +75,8 @@
   border: 1.1px solid black;
   cursor: pointer;
   background-color: aliceblue;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 .res-img{
   
@@ -65,4 +87,31 @@
 
 .search{
   margin:5px;
+}
+
+
+.filter-btn {
+  background-color: #05c598;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.filter-btn:hover {
+  background-color: #05c598;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.filter-btn:active {
+  background-color: #05c598;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(2px);
 }
