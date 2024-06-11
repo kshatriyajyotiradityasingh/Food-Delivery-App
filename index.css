@@ -1,9 +1,14 @@
 .cards{
+  position: absolute;
   display: flex;
   flex-wrap: wrap;
 }
 .filter{
   margin: 5px;
+}
+.body-head{
+  display: flex;
+  align-items: center;
 }
 
 
@@ -87,9 +92,72 @@
 
 .search{
   margin:5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-btn{
+  background-color: #05c598;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+.search-box {
+  position: relative;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #7b7777;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 300px;
+  transition: border-color 0.3s;
+}
 
+.search-box .suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 0;
+  opacity: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  background-color: white;
+  /* Add a background color to suggestions for better visibility */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Optional: Add a shadow for a better look */
+  z-index: 1000;
+  /* Ensure suggestions appear above other content */
+  transition: opacity 0.3s;
+}
+
+.search-box:focus-within .suggestions {
+  opacity: 1;
+  padding: 10px 8px;
+}
+
+.suggestions .suggestion {
+  padding: 8px 12px;
+  width: 100%;
+  border-radius: 3px;
+  display: block;
+  /* Ensure suggestions are displayed as block elements */
+}
+
+/* Optional: Style the suggestions on hover */
+.suggestions .suggestion:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
 .filter-btn {
   background-color: #05c598;
   border: none;
@@ -115,3 +183,9 @@
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
   transform: translateY(2px);
 }
+
+
+
+
+
+

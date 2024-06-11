@@ -1,11 +1,12 @@
 import React from "react";
 import RestaurantCard from "./RestaurantCard";
-import { listOfRes } from "../utils/Mock_data";
+import Search from "./Search";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [list, setList] = useState([]);
+  const [searchData, setSearchData] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -18,15 +19,17 @@ const Body = () => {
 
     const json = await data.json();
 
-    //  console.log(json);
+    //console.log(json);
 
     setList(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    // console.log(list);
+    setSearchData(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
-  if (list.length === 0) {
+  if (searchData.length === 0) {
     return (
       <div>
         <div className="filter">
@@ -47,19 +50,25 @@ const Body = () => {
 
   return (
     <div className="body">
-      <div className="filter">
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filterList = list.filter((res) => res.info.avgRating > 4.2);
-            setList(filterList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+      <div className="body-head">
+        <Search list={list} setSearchData={setSearchData} />
+        <div className="filter">
+          <button
+            className="filter-btn"
+            onClick={() => {
+              const filterList = searchData.filter(
+                (res) => res.info.avgRating > 4.2
+              );
+              setSearchData(filterList);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
       </div>
+
       <div className="cards">
-        {list.map((res, index) => (
+        {searchData.map((res, index) => (
           <RestaurantCard key={index} resData={res} />
         ))}
       </div>
