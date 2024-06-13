@@ -205,6 +205,13 @@ a {
   border-radius: 10px;
 }
 
+.user-card {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
 
 
 
