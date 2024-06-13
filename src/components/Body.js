@@ -1,8 +1,10 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import RestaurantCard from "./RestaurantCard";
 import Search from "./Search";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [list, setList] = useState([]);
@@ -16,6 +18,8 @@ const Body = () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.87560&lng=80.91150&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
+
+    console.log(data);
 
     const json = await data.json();
 
@@ -69,7 +73,9 @@ const Body = () => {
 
       <div className="cards">
         {searchData.map((res, index) => (
-          <RestaurantCard key={index} resData={res} />
+          <Link key={index} to={"/restaurant/" + res.info.id}>
+            <RestaurantCard resData={res} />
+          </Link>
         ))}
       </div>
     </div>

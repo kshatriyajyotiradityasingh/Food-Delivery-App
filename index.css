@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+  color: black;
+}
 .cards{
   position: absolute;
   display: flex;
@@ -183,6 +187,26 @@
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
   transform: translateY(2px);
 }
+
+.res-menu-head{
+  display: flex;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 90%;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 10px;
+  margin-left: 50px;
+}
+
+.menu-img{
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+}
+
+
+
 
 
 
