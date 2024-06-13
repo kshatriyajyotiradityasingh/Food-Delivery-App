@@ -1,14 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import RestaurantCard from "./RestaurantCard";
 import Search from "./Search";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 
 const Body = () => {
   const [list, setList] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const isOnline = useOnline();
 
   useEffect(() => {
     fetchData();
@@ -32,6 +33,14 @@ const Body = () => {
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+
+  if (isOnline === false) {
+    return (
+      <div>
+        <h1>Looks like you are offline...</h1>
+      </div>
+    );
+  }
 
   if (searchData.length === 0) {
     return (
