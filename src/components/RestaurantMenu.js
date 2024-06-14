@@ -2,7 +2,13 @@ import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { CDN_LINK } from "../utils/Constants";
+import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
+
 const RestaurantMenu = () => {
+  const [show, setShow] = useState(false);
+  const [showIndex, setShowIndex] = useState(null);
+
   const { resId } = useParams();
 
   const resInfo = useRestaurantMenu(resId);
@@ -22,8 +28,16 @@ const RestaurantMenu = () => {
     resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
       ?.card;
 
-  console.log(itemCards);
+  // console.log(
+  //   resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
+  // );
 
+  const categories =
+    resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) => c?.card?.card?.["@type"]?.includes(".ItemCategory")
+    );
+
+  //console.log(categories);
   return (
     <div>
       <div className="res-menu-head">
@@ -38,16 +52,18 @@ const RestaurantMenu = () => {
         </div>
       </div>
 
-      <div className="res-menu-head">
-        <h1>Menu</h1>
-        <ul>
-          {itemCards.map((item) => (
-            <li key={item.card.info.id}>
-              {item.card.info.name}-Rs.{" "}
-              {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-            </li>
-          ))}
-        </ul>
+      <div className="res-menu-body">
+        <h1>{name}'s Menu</h1>
+
+        {categories.map((cat, index) => (
+          <RestaurantCategory
+            key={index}
+            data={cat.card.card}
+            show={index === showIndex ? true : false}
+            setShowIndex={setShowIndex}
+            index={index}
+          />
+        ))}
       </div>
     </div>
   );

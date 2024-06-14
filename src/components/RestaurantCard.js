@@ -10,7 +10,7 @@ const RestaurantCard = ({ resData }) => {
     deliveryTime,
   } = resData.info;
 
-  // console.log(name);
+  // console.log(resData.info.veg);
   return (
     <div className="res-card">
       <img className="res-img" src={CDN_LINK + cloudinaryImageId} />
@@ -27,6 +27,17 @@ const RestaurantCard = ({ resData }) => {
       </div>
     </div>
   );
+};
+
+export const withPromotedLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div className="veg-card">
+        <label className="veg-label">Veg Only</label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
 };
 
 export default RestaurantCard;

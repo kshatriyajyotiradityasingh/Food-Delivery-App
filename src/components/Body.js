@@ -1,15 +1,19 @@
-import React from "react";
-import RestaurantCard from "./RestaurantCard";
+import React, { useContext } from "react";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Search from "./Search";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [list, setList] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const isOnline = useOnline();
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
+  const VegResCard = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -20,11 +24,11 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.87560&lng=80.91150&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
-    console.log(data);
+    // console.log(data);
 
     const json = await data.json();
 
-    //console.log(json);
+    console.log(json);
 
     setList(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -78,12 +82,24 @@ const Body = () => {
             Top Rated Restaurants
           </button>
         </div>
+
+        <label>User Name : </label>
+        <input
+          type="text"
+          className="user-input"
+          value={loggedInUser}
+          onChange={(e) => setUserName(e.target.value)}
+        ></input>
       </div>
 
       <div className="cards">
         {searchData.map((res, index) => (
           <Link key={index} to={"/restaurant/" + res.info.id}>
-            <RestaurantCard resData={res} />
+            {res.info.veg ? (
+              <VegResCard resData={res} />
+            ) : (
+              <RestaurantCard resData={res} />
+            )}
           </Link>
         ))}
       </div>
