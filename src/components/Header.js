@@ -12,7 +12,10 @@ const Header = () => {
   const cart = useSelector((store) => store.cart.items);
   return (
     <div className="header">
-      <img className="logo" src={LOGO_LINK} />
+      <Link to={"/"}>
+        {" "}
+        <img className="logo" src={LOGO_LINK} />
+      </Link>
 
       <div className="nav-links">
         <ul>

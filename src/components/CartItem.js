@@ -1,23 +1,29 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CDN_LINK } from "../utils/Constants";
-import { addItem } from "../utils/CartSlice";
-import { addItemPrice } from "../utils/PriceSlice";
-const ItemList = ({ items }) => {
+import { removeItem } from "../utils/CartSlice";
+import { removeItemPrice } from "../utils/PriceSlice";
+
+const CartItem = ({ items }) => {
   // console.log(items);
 
   const dispatch = useDispatch();
+  const totalPrice = useSelector((store) => store.totalPrice.price);
 
-  const handleClick = (item) => {
-    const addPrice = item.card.info.price
+  console.log(totalPrice);
+
+  const handleClick = (index, item) => {
+    const removePrice = item.card.info.price
       ? item.card.info.price
       : item.card.info.defaultPrice;
-    dispatch(addItem(item));
-    dispatch(addItemPrice(addPrice));
+
+    console.log(removePrice);
+    dispatch(removeItem(index));
+    dispatch(removeItemPrice(removePrice));
   };
 
   return (
     <div>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <div key={item.card.info.id} className="item">
           <div className="item-head">
             <div>
@@ -33,9 +39,9 @@ const ItemList = ({ items }) => {
             <div>
               <button
                 className="item-add-button"
-                onClick={() => handleClick(item)}
+                onClick={() => handleClick(index, item)}
               >
-                Add+
+                Remove
               </button>
               <img
                 src={CDN_LINK + item.card.info.imageId}
@@ -45,8 +51,18 @@ const ItemList = ({ items }) => {
           </div>
         </div>
       ))}
+
+      {items.length ? (
+        <div>
+          <h1>Total Price : {totalPrice}</h1>
+        </div>
+      ) : (
+        <div>
+          <h1> </h1>
+        </div>
+      )}
     </div>
   );
 };
 
-export default ItemList;
+export default CartItem;

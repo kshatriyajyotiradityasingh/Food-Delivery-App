@@ -6,6 +6,7 @@ const About = () => {
       <h1>This is Luncher</h1>
       <h2>Made By KJ</h2>
       <UserClass />
+      <User />
     </div>
   );
 };

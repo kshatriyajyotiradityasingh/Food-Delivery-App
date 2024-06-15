@@ -6,6 +6,7 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import UserContext from "../utils/UserContext";
+import UpadateList from "./UpadateList";
 
 const Body = () => {
   const [list, setList] = useState([]);
@@ -26,16 +27,29 @@ const Body = () => {
 
     // console.log(data);
 
+    const data1 = await fetch(
+      "https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING`"
+    );
+
+    const json1 = await data1.json();
+
     const json = await data.json();
 
     console.log(json);
 
-    setList(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setSearchData(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    const arr =
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
+
+    const arr1 =
+      json1?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
+
+    const newarr = [...arr, ...arr1];
+
+    console.log(newarr);
+    setList(newarr);
+    setSearchData(newarr);
   };
 
   if (isOnline === false) {
